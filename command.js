@@ -24,9 +24,7 @@ Command.prototype.parse = function(input) {
     });
 
   this.grid = new Grid(gridCoords[0], gridCoords[1]);
-  //console.log(this.grid);
   this.robots = this._parseRobots(inputArr);
-  //console.log(this.robots);
 };
 
 Command.prototype.execute = function() {
@@ -35,35 +33,36 @@ Command.prototype.execute = function() {
   var lastPos;
   var robot;
 
-  initialPos = this.robots[2][0].split('');
-  instructions = this.robots[2][1].split('');
-  console.log(initialPos, instructions);
-  robot = new Robot(+initialPos[0], +initialPos[1], initialPos[2]);
+  //test on single robot
+  //initialPos = this.robots[2][0].split('');
+  //instructions = this.robots[2][1].split('');
 
-  for (var i=0, length = instructions.length-1; i<=length; i++) {
-    if (Robot.isLost == 1) { break; }
-    this._executeCommand(robot, instructions[i]);
-  };
-
-  results.push(robot);
-  return console.log(this._formatOutput());
-
-  //TO DO
-  //for (var i=0, length = this.robots.length; i<length; i++) {
-    //initialPos = this.robots[i][0].split('');
-    //instructions = this.robots[i][1].split('');
-
-    //robot = new Robot(+initialPos[0], +initialPos[1], initialPos[2]);
+  //robot = new Robot(+initialPos[0], +initialPos[1], initialPos[2]);
 
     //for (var i=0, length = instructions.length-1; i<=length; i++) {
+      ////console.log(robot)
       //if (Robot.isLost == 1) { break; }
       //this._executeCommand(robot, instructions[i]);
     //};
 
     //results.push(robot);
-  //};
 
-  //this._formatOutput();
+  this.robots.forEach(function(robot, i) {
+    initialPos = robot[0].split('');
+    instructions = robot[1].split('');
+    robot = new Robot(+initialPos[0], +initialPos[1], initialPos[2]);
+
+    console.log(instructions);
+    for (var i=0, length = instructions.length-1; i<=length; i++) {
+      //console.log(robot)
+      if (Robot.isLost == 1) { break; }
+      this._executeCommand(robot, instructions[i]);
+    };
+
+    results.push(robot);
+  }, this);
+  //console.log(results)
+  return this._formatOutput();
 };
 
 Command.prototype._executeCommand = function(robot, command) {
@@ -101,7 +100,11 @@ Command.prototype._formatOutput = function() {
       printStr += (result.lastPos.x).toString() +
         (result.lastPos.y).toString() +
         (result.lastPos.orientation).toString();
-      printStr += ' LOST';
+      printStr += ' LOST\n';
+    } else {
+      printStr += (result.afterMove.x).toString() +
+        (result.afterMove.y).toString() +
+        (result.afterMove.orientation).toString() + '\n';
     }
   });
   return printStr;

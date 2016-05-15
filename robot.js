@@ -7,6 +7,7 @@ var Robot = function(x, y, orientation) {
   this.orientation = orientation;
   this.isLost = 0;
   this.lastPos;
+  this.afterMove;
 
   if (!this instanceof Robot) {
     return new Robot(x, y, orientation);
@@ -55,10 +56,7 @@ Robot.prototype._move = function() {
 }
 
 Robot.prototype.moveForward = function() {
-  if (this.isLost == 1) {
-    console.log('dude, I am lost');
-    return;
-  };
+  if (this.isLost == 1) { return; };
   this.lastPos = {
     x: this.x,
     y: this.y,
@@ -71,6 +69,11 @@ Robot.prototype.moveForward = function() {
   };
 
   this._move();
+  this.afterMove = {
+    x: this.x,
+    y: this.y,
+    orientation: this.orientation,
+  }
 
   if (!Grid.isInBound(this.x, this.y)) {
     this.isLost = 1;

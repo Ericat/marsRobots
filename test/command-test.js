@@ -3,12 +3,7 @@
 var fs = require('fs');
 var assert = require('assert');
 var assertChai = require('chai').assert;
-//var sinon = require('sinon');
-
-//var gridSpy = sinon.spy(Grid, "init");
-//assert.equal(Command.getRobots().length, 3);
-//assert.equal(gridSpy.calledOnce, true);
-//gridSpy.reset();
+var sinon = require('sinon');
 
 var Command = require('../command');
 var Grid = require('../grid');
@@ -17,9 +12,11 @@ var Robot = require('../robot');
 describe('a command should', function() {
   var input;
   var command;
+  var printOutput;
+  var executeCommand;
 
   beforeEach(function() {
-    input= fs.readFileSync('/Users/ericat/marsRobots/test/sampleInput.txt')
+    input = fs.readFileSync('/Users/ericat/marsRobots/test/sampleInput.txt')
     .toString();
     command = new Command();
   });
@@ -30,9 +27,8 @@ describe('a command should', function() {
     assertChai.isArray(command.robots);
   });
 
-  it('executes instructions', function() {
+  it('execute instructions', function() {
     command.parse(input);
-    command.execute();
+    assertChai.match(command.execute(), /11E/);
   });
-
 });
