@@ -12,34 +12,51 @@ var Robot = function(x, y, orientation) {
   if (!this instanceof Robot) {
     return new Robot(x, y, orientation);
   }
-}
+};
 
-Robot.prototype.turn = function(command) {
-  if (command == 'L') { return this._turnLeft(); };
-  if (command == 'R') { return this._turnRight(); };
-}
+Robot.prototype.parse = function(command) {
+    switch(command) {
+      case 'F':
+        return this.moveForward();
+      case 'R':
+        return this._turnRight();
+      case 'L':
+        return this._turnLeft();
+      default:
+        throw new Error('Command not recognised');
+    }
+};
 
 Robot.prototype._turnRight = function() {
   var rightTurns = {
     N: 'E',
     E: 'S',
     S: 'W',
-    W: 'N'
+    W: 'N',
   };
 
-  var currentOrientation = this.orientation;
-  return this.orientation = rightTurns[currentOrientation];
-}
+  this._updateOrientation(rightTurns, this.orientation);
+};
 
 Robot.prototype._turnLeft = function() {
   var leftTurns = {
     N: 'W',
     W: 'S',
     S: 'E',
-    E: 'N'
+    E: 'N',
   };
-  var currentOrientation = this.orientation;
-  return this.orientation = leftTurns[currentOrientation];
+
+  this._updateOrientation(leftTurns, this.orientation);
+};
+
+Robot.prototype._updateOrientation = function(turns, newOrientation) {
+  this.orientation = turns[newOrientation];
+  if (this.afterMove !== undefined) {
+    this.afterMove.orientation = this.orientation;
+  }
+  if (this.lastPos !== undefined) {
+    this.lastPos.orientation = this.orientation;
+  }
 };
 
 Robot.prototype._move = function() {
