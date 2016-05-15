@@ -70,7 +70,7 @@ Robot.prototype._move = function() {
     case 'W':
       return this.x--;
   }
-}
+};
 
 Robot.prototype.moveForward = function() {
   if (this.isLost == 1) { return; };

@@ -10,7 +10,7 @@ var Command = function() {
   if (!this instanceof Command) {
     return new Command();
   }
-}
+};
 
 Command.prototype.parse = function(input) {
   var inputArr = input.split('\n');

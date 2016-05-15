@@ -21,7 +21,7 @@ var Grid = function(x, y) {
   if (!this instanceof Grid) {
     return new Grid(x, y);
   }
-}
+};
 
 function _makeGrid(width, height) {
   var rows = [];
@@ -33,7 +33,7 @@ function _makeGrid(width, height) {
 
 function _makeCell(width) {
   return new Array(width).fill(0);
-};
+}
 
 function _isValidRange(x, y) {
   return x > 0 && x <= 50 &&
@@ -50,18 +50,18 @@ function _isCoordsMatch(positions, coords) {
 
 Grid.leaveScent = function(options) {
   return scented[options.orientation].push([options.x, options.y]);
-}
+};
 
 Grid.hasScent = function(options) {
   var positions = scented[options.orientation] || [];
 
   if (positions.length == 0) { return false; };
   return _isCoordsMatch(positions, [options.x, options.y]);
-}
+};
 
 Grid.isInBound = function(x, y) {
   return x >= 0 && x <= (width) &&
     y >= 0 && y <= (height);
-}
+};
 
 module.exports = Grid;
