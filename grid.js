@@ -11,35 +11,34 @@ var width;
 var height;
 
 var Grid = function(x, y) {
-  if (!this._isValidRange(x, y)) {
+  if (!_isValidRange(x, y)) {
     return false;
   }
   this.x = width = x;
   this.y = height = y;
-  this.spaces = this._makeGrid(width, height);
+  this.spaces = _makeGrid(width, height);
 
   if (!this instanceof Grid) {
     return new Grid(x, y);
   }
 }
 
-Grid.prototype._makeGrid = function(width, height) {
+function _makeGrid(width, height) {
   var rows = [];
   for (var i=0; i<= height; i++) {
-    rows.push(this._makeCell(width));
+    rows.push(_makeCell(width));
   };
   return rows;
 }
 
-Grid.prototype._makeCell = function(width) {
+function _makeCell(width) {
   return new Array(width).fill(0);
 };
 
-Grid.prototype._isValidRange = function(x, y) {
+function _isValidRange(x, y) {
   return x > 0 && x <= 50 &&
     y > 0 && y <= 50;
 }
-
 
 function _isCoordsMatch(positions, coords) {
   return positions.some(function(position) {

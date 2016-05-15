@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm run test",
+    "start": "node index.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha ./test/*-test.js"
   },
   "author": "",

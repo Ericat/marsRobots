@@ -9,7 +9,7 @@ var Command = require('../command');
 var Grid = require('../grid');
 var Robot = require('../robot');
 
-describe('a command should', function() {
+describe('A command should', function() {
   var input;
   var command;
   var printOutput;

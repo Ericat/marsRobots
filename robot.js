@@ -19,7 +19,7 @@ Robot.prototype.turn = function(command) {
   if (command == 'R') { return this._turnRight(); };
 }
 
-Robot.prototype._turnRight = function(dir) {
+Robot.prototype._turnRight = function() {
   var rightTurns = {
     N: 'E',
     E: 'S',
@@ -31,7 +31,7 @@ Robot.prototype._turnRight = function(dir) {
   return this.orientation = rightTurns[currentOrientation];
 }
 
-Robot.prototype._turnLeft = function(dir) {
+Robot.prototype._turnLeft = function() {
   var leftTurns = {
     N: 'W',
     W: 'S',
@@ -63,12 +63,10 @@ Robot.prototype.moveForward = function() {
     orientation: this.orientation,
   };
 
-  if (Grid.hasScent(this.lastPos)) {
-    console.log('I solemnly refuse to move');
-    return;
-  };
+  if (Grid.hasScent(this.lastPos)) { return; };
 
   this._move();
+
   this.afterMove = {
     x: this.x,
     y: this.y,

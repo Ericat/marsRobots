@@ -3,7 +3,7 @@
 var Grid = require('../grid');
 var assert = require('assert');
 
-describe('a grid should', function() {
+describe('A grid should', function() {
   it.skip('return false if instantiated with invalid coordinates', function() {
     var invalidX = 51;
     var invalidY = 9;

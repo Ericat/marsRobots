@@ -62,7 +62,7 @@ Command.prototype.execute = function() {
     results.push(robot);
   }, this);
   //console.log(results)
-  return this._formatOutput();
+  return _formatOutput();
 };
 
 Command.prototype._executeCommand = function(robot, command) {
@@ -93,7 +93,7 @@ Command.prototype._parseRobots = function(arr) {
   return this.robots;
 };
 
-Command.prototype._formatOutput = function() {
+function _formatOutput() {
   var printStr = '';
   results.forEach(function(result) {
     if (result.isLost == 1) {

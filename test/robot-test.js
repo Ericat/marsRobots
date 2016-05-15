@@ -4,7 +4,7 @@ var Robot = require('../robot');
 var Grid = require('../grid');
 var assert = require('assert');
 
-describe('a robot should', function() {
+describe('A robot should', function() {
   var marsGrid;
   beforeEach(function() {
     marsGrid = new Grid(5, 3);
