@@ -17,6 +17,10 @@ var Grid = function(x, y) {
   this.x = width = x;
   this.y = height = y;
   this.spaces = this._makeGrid(width, height);
+
+  if (!this instanceof Grid) {
+    return new Grid(x, y);
+  }
 }
 
 Grid.prototype._makeGrid = function(width, height) {

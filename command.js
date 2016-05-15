@@ -7,7 +7,9 @@ var results = [];
 var Command = function() {
   this.grid;
   this.robots = [];
-//
+  if (!this instanceof Command) {
+    return new Command();
+  }
 }
 
 Command.prototype.parse = function(input) {

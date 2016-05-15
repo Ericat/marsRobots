@@ -7,6 +7,10 @@ var Robot = function(x, y, orientation) {
   this.orientation = orientation;
   this.isLost = 0;
   this.lastPos;
+
+  if (!this instanceof Robot) {
+    return new Robot(x, y, orientation);
+  }
 }
 
 Robot.prototype.turn = function(command) {
