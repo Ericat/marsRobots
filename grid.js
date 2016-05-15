@@ -1,19 +1,22 @@
 'use strict';
 
 var _ = require('underscore');
-var Grid = function(width, height) {
-  if (!this._isValidRange(width, height)) {
+var scented = {
+  'N': [],
+  'S': [],
+  'E': [],
+  'W': [],
+};
+var width;
+var height;
+
+var Grid = function(x, y) {
+  if (!this._isValidRange(x, y)) {
     return false;
   }
-  this.width = width;
-  this.height = height;
+  this.x = width = x;
+  this.y = height = y;
   this.spaces = this._makeGrid(width, height);
-  this.scented = {
-    'N': [],
-    'S': [],
-    'E': [],
-    'W': [],
-  };
 }
 
 Grid.prototype._makeGrid = function(width, height) {
@@ -33,12 +36,8 @@ Grid.prototype._isValidRange = function(x, y) {
     y > 0 && y <= 50;
 }
 
-Grid.prototype.isInBound = function(x, y) {
-  return x >= 0 && x <= (this.width) &&
-    y >= 0 && y <= (this.height);
-}
 
-Grid.prototype._isCoordsMatch  = function (positions, coords) {
+function _isCoordsMatch(positions, coords) {
   return positions.some(function(position) {
     if (_.isEqual(position, coords)) {
       return true;
@@ -46,15 +45,20 @@ Grid.prototype._isCoordsMatch  = function (positions, coords) {
   });
 }
 
-Grid.prototype.leaveScent = function(coords, orientation) {
-  return this.scented[orientation].push(coords);
+Grid.leaveScent = function(options) {
+  return scented[options.orientation].push([options.x, options.y]);
 }
 
-Grid.prototype.hasScent = function(coords, orientation) {
-  var positions = this.scented[orientation] || [];
+Grid.hasScent = function(options) {
+  var positions = scented[options.orientation] || [];
 
   if (positions.length == 0) { return false; };
-  return this._isCoordsMatch(positions, coords);
+  return _isCoordsMatch(positions, [options.x, options.y]);
+}
+
+Grid.isInBound = function(x, y) {
+  return x >= 0 && x <= (width) &&
+    y >= 0 && y <= (height);
 }
 
 module.exports = Grid;
