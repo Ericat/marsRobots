@@ -20,19 +20,19 @@ describe('A robot should', function() {
 
   it('turn right, given a R command', function() {
     var marsRobot = new Robot(2, 3, 'N');
-    marsRobot.turn('R');
+    marsRobot.parse('R');
     assert.equal(marsRobot.orientation, 'E');
   });
 
   it('turn left, after a L command', function() {
     var marsRobot = new Robot(0, 3, 'W');
-    marsRobot.turn('L');
+    marsRobot.parse('L');
     assert.equal(marsRobot.orientation, 'S');
   });
 
   it('move forward, given an orientation', function() {
     var marsRobot = new Robot(3, 2, 'N');
-    marsRobot.moveForward();
+    marsRobot.parse('F');
 
     assert.equal(marsRobot.orientation, 'N');
     assert.equal(marsRobot.x, 3);

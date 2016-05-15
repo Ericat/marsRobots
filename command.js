@@ -33,49 +33,23 @@ Command.prototype.execute = function() {
   var lastPos;
   var robot;
 
-  //test on single robot
-  //initialPos = this.robots[2][0].split('');
-  //instructions = this.robots[2][1].split('');
-
-  //robot = new Robot(+initialPos[0], +initialPos[1], initialPos[2]);
-
-    //for (var i=0, length = instructions.length-1; i<=length; i++) {
-      ////console.log(robot)
-      //if (Robot.isLost == 1) { break; }
-      //this._executeCommand(robot, instructions[i]);
-    //};
-
-    //results.push(robot);
-
   this.robots.forEach(function(robot, i) {
     initialPos = robot[0].split('');
     instructions = robot[1].split('');
     robot = new Robot(+initialPos[0], +initialPos[1], initialPos[2]);
 
-    console.log(instructions);
     for (var i=0, length = instructions.length-1; i<=length; i++) {
-      //console.log(robot)
       if (Robot.isLost == 1) { break; }
       this._executeCommand(robot, instructions[i]);
     };
 
     results.push(robot);
   }, this);
-  //console.log(results)
   return _formatOutput();
 };
 
 Command.prototype._executeCommand = function(robot, command) {
-    switch(command) {
-      case 'F':
-        return robot.moveForward();
-      case 'R':
-        return robot.turn(command);
-      case 'L':
-        return robot.turn(command);
-      default:
-        throw new Error('Command not recognised');
-    }
+  return robot.parse(command);
 };
 
 Command.prototype._parseRobots = function(arr) {

@@ -1,14 +1,14 @@
 'use strict';
 
 var _ = require('underscore');
+var width;
+var height;
 var scented = {
   'N': [],
   'S': [],
   'E': [],
   'W': [],
 };
-var width;
-var height;
 
 var Grid = function(x, y) {
   if (!_isValidRange(x, y)) {
