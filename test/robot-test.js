@@ -39,7 +39,7 @@ describe('A robot should', function() {
     assert.equal(marsRobot.y, 3);
   });
 
-  it('leaves a scent when is lost', function() {
+  it('leave a scent when is lost', function() {
     var marsRobot = new Robot(4, 3, 'N');
     marsRobot.moveForward();
     assert.equal(marsRobot.isLost, 1);
