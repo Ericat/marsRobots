@@ -12,7 +12,7 @@ var scented = {
 
 var Grid = function(x, y) {
   if (!_isValidRange(x, y)) {
-    return false;
+    throw new Error('Invalid coordinates!');
   }
   this.x = width = x;
   this.y = height = y;

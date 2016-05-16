@@ -4,12 +4,12 @@ var Grid = require('../grid');
 var assert = require('assert');
 
 describe('A grid should', function() {
-  it.skip('return false if instantiated with invalid coordinates', function() {
+  it('throw if instantiated with invalid coordinates', function() {
     var invalidX = 51;
     var invalidY = 9;
-    var emptymarsGrid = new Grid(invalidX, invalidY);
-    //TO DO fix empty object
-    assert.equal(emptymarsGrid, false);
+    assert.throws(function() { new Grid(invalidX, invalidY); },
+      'Invalid coordinates!'
+    );
   });
 
   it('be initialised with coordinates x and y', function() {
